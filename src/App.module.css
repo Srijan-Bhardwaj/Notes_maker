@@ -26,8 +26,8 @@
   transform-style: preserve-3d;  /*this is main thing bcz of it behaves like real 3d card*/
 }
 
-.innerContainer:hover{
-  transform:rotateY(180deg);
+.innerContainer:hover,.innerContainer:focus-within{
+    transform:rotateY(180deg);
 }
 
 .demo{
