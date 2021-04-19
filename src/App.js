@@ -2,7 +2,18 @@ import React, { useState } from "react";
 import Style from "./App.module.css";
 import Dev from "./Formal_photo.jpg";
 import List from "./ListItems";
+import IconButton from "@material-ui/core/IconButton";
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import {makeStyles} from "@material-ui/core";
 
+const useStyles = makeStyles({
+  icon:{
+    fontSize:'2em',
+    '&:hover':{
+      color:'green'
+    }
+  }
+})
 const App = () => {
   const [Item, setItem] = useState("");   //if u don't give "" intitiall then it is not a controlled element and throws an error
   const [Items, setItems] = useState([]);
@@ -29,6 +40,8 @@ const App = () => {
         });
     }
 
+  const classes = useStyles();
+
   return (
     <>
       <div className={Style.container}>
@@ -44,11 +57,13 @@ const App = () => {
                 value={Item}
                 name="Item"
                 onChange={inputEvent}
-                placeholder="Add a item"
+                placeholder="Add an item"
                 controlled="true"
                 required
               ></input>
-              <button type="submit"><i className="fa fa-plus-circle" aria-hidden="true"></i></button>
+              <button type="submit">
+              <AddBoxIcon color="primary" className={classes.icon}/>
+              </button>
               </form>
             </div>
             <div className={Style.lists}>
@@ -68,6 +83,10 @@ const App = () => {
               <img src={Dev} alt="photo" />
             </div>
             <div className={Style.developer}>Srijan Bhardwaj</div>
+            <ol className={Style.use}>
+              <li>Click one time delete icon to enable/disable strike through on content.</li><br/>
+            <li>Double click delete icon to remove the content.</li>
+            </ol>
           </div>
         </div>
       </div>
@@ -76,3 +95,4 @@ const App = () => {
 };
 
 export default App;
+

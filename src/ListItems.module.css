@@ -1,19 +1,5 @@
-.cross{
-    margin:2px 0;
-    font-size:1.2em;
-}
 
-.cross span{
-    padding:2px;
-    margin-right:0.5em;
-    border-radius: 50%;
-}
-
-.cross span:hover{
-    color:red;
-}
-
-li{
+.cross li{
     font-family: cursive;
     display:inline-block;
 }

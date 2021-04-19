@@ -23,10 +23,11 @@
   border:1px solid cornflowerblue;
   box-shadow:0 2px 8px 0 rgba(0, 0, 0, 0.3);
   transition:transform 1s;
+  transform:translateZ(10px);
   transform-style: preserve-3d;  /*this is main thing bcz of it behaves like real 3d card*/
 }
 
-.innerContainer:hover{
+.innerContainer:hover,.innerContainer:focus-within{
   transform:rotateY(180deg);
 }
 
@@ -45,6 +46,7 @@
   height:10em;
   margin:0 auto;
   margin-top:1em ;
+  box-shadow:0.1em 0.1em 2px 1px rgba(0, 0, 0, 0.11);
 }
 
 .image img{
@@ -55,13 +57,21 @@
 
 .demo .developer{
   position:relative;
-  top:1em;
+  top:0.5em;
   text-align:center;
   font-size:3em;
   -webkit-text-stroke-width: 0.01em;
   -webkit-text-stroke-color: aqua;
   font-family: 'Caveat', cursive;
   font-style: italic;
+  text-shadow:0.1em 0.05em 5px rgba(0, 0, 0, 0.87);
+}
+
+.demo .use{
+  list-style:lower-alpha;
+  color:aqua;
+  margin:4em 2em 0 2em;
+  text-align: justify;
 }
 
 .card{
@@ -84,15 +94,17 @@
   background-clip: text;
   color:black;
   font-size:2em;
+  text-shadow: 0.1em 0.05em 10px rgba(0, 0, 0, 0.486);
 }
 
 .input{
   display:flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
 .input input[type="text"]{
-  width:80%;
+  /* width:80%; */
   font-size:1.75em;
   font-family: 'Caveat', cursive;
   border:none;
@@ -110,14 +122,7 @@
 
 .input button{
   all:unset;
-}
-
-.input button i{
-  font-size:2em;
-}
-
-.input button i:hover{
-  color:darkgreen;
+  cursor:pointer;
 }
 
 .card .lists{
