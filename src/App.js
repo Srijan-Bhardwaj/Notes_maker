@@ -14,20 +14,34 @@ const useStyles = makeStyles({
     }
   }
 })
+
+const getItemsfromLocalStorage=()=>{
+  let list = JSON.parse(localStorage.getItem('todolist'));
+  if(list.length>0){
+    return list;
+  }
+  else{
+    console.log("hello");
+    return ['Welcome, create your today\'s to do list.'];
+  }
+}
 const App = () => {
   const [Item, setItem] = useState("");   //if u don't give "" intitiall then it is not a controlled element and throws an error
-  const [Items, setItems] = useState([]);
+  const [Items, setItems] = useState(getItemsfromLocalStorage());
 
+  useEffect(()=>{
+    localStorage.setItem('todolist',JSON.stringify(Items));
+  },[Items]);
   const inputEvent = (e) => {
     setItem(e.target.value);
   };
 
   const add = (event) => {
       event.preventDefault();
-      setItem("");
     setItems((e) => {
       return [...e, Item];
     });
+    setItem("");
     // console.log(Items);
   };
 
