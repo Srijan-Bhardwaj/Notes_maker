@@ -5,7 +5,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 
 const List = (props) => {
-    const [line,setLine] = useState(false);
 
   return (
     <>
@@ -14,11 +13,7 @@ const List = (props) => {
           <IconButton
             color="secondary"
             onClick={()=>{
-                setLine((value)=>{
-                    if(value==true)
-                    return false;
-                    else return true;
-                })
+                return props.onSingleClick(props.id);
             }}
             onDoubleClick={() => {
               return props.onSelect(props.id);
@@ -28,7 +23,7 @@ const List = (props) => {
           </IconButton>
         </span>
         {/* {props.onSelect(props.id)} will no work u hve to pass a call back function */}
-        <li style={{textDecoration: line?"line-through":"none"}}>{props.text}</li>
+        <li style={{textDecoration: props.line?"line-through":"none"}}>{props.text}</li>
       </div>
     </>
   );

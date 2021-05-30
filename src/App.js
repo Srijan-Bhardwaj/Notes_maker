@@ -18,21 +18,40 @@ const useStyles = makeStyles({
 
 const getItemsfromLocalStorage=()=>{
   let list = JSON.parse(localStorage.getItem('todolist'));
-  if(list.length>0){
+  if(list==null){
+    return ['Welcome, create your today\'s to do list.']
+  }
+  else if(list.length>0){
     return list;
   }
   else{
-    console.log("hello");
+    // console.log("hello");
     return ['Welcome, create your today\'s to do list.'];
+  }
+}
+
+const getDatafromLocalStorage=()=>{
+  let list = JSON.parse(localStorage.getItem('ltlist'));
+  if(list==null){
+    return [false];
+  }
+  else if(list.length>0){
+    return list;
+  }
+  else{
+    return [false];
   }
 }
 const App = () => {
   const [Item, setItem] = useState("");   //if u don't give "" intitiall then it is not a controlled element and throws an error
   const [Items, setItems] = useState(getItemsfromLocalStorage());
+  const [lt,setLt] = useState(getDatafromLocalStorage());
 
   useEffect(()=>{
     localStorage.setItem('todolist',JSON.stringify(Items));
-  },[Items]);
+    localStorage.setItem('ltlist',JSON.stringify(lt));
+  },[Items,lt]);
+
   const inputEvent = (e) => {
     setItem(e.target.value);
   };
@@ -43,7 +62,9 @@ const App = () => {
       return [...e, Item];
     });
     setItem("");
-    // console.log(Items);
+    setLt((prev)=>{
+      return [...prev,false];
+    });
   };
 
   const deleteItem = (id)=>{
@@ -53,8 +74,26 @@ const App = () => {
                 return index!==id;
             });
         });
+        setLt((prev)=>{
+          return prev.filter((value,index)=>{
+            return index!==id;
+          })
+        });
     }
 
+  const singleClickChange=(id)=>{
+    setLt((prev)=>{
+      let newlt = [...prev];
+      if(prev[id]==true){
+        newlt[id] = false;
+        return newlt;
+      }
+      else{
+        newlt[id]=true;
+        return newlt;
+      }
+    });
+  }
   const classes = useStyles();
 
   return (
@@ -86,7 +125,7 @@ const App = () => {
                 {Items.map((value,index)=>{
                     return (
                         <>
-                            <List text={value} id={index} key={index} onSelect={deleteItem}/>
+                            <List text={value} id={index} key={index} onSelect={deleteItem} onSingleClick={singleClickChange} line={lt[index]}/>
                         </>
                     )
                 })}
