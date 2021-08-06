@@ -3,7 +3,6 @@ import {useEffect} from 'react';
 import Style from "./App.module.css";
 import Dev from "./Formal_photo.jpg";
 import List from "./ListItems";
-import IconButton from "@material-ui/core/IconButton";
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import {makeStyles} from "@material-ui/core";
 
@@ -102,7 +101,7 @@ const App = () => {
         <div className={Style.innerContainer}>
           <div className={Style.card}>
             <div className={Style.header}>
-              <div className={Style.heading}>ToDo List</div>
+              <div className={Style.heading}>Notes</div>
             </div>
             <div className={Style.input}>
                 <form onSubmit={add}> 
